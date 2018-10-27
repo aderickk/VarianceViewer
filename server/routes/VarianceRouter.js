@@ -32,4 +32,12 @@ VarianceRouter.route('/single/:varId').get(function (req, res){
     });
 });
 
+VarianceRouter.route('/single/').get(function (req, res){
+    var query = VarianceModel.find({}).select({ "_id": 1, "var001": 1});
+    query.exec(function (err, allVariances) {
+        if (err){ console.log(err);}
+        else {res.json(allVariances);}
+    });
+});
+
 module.exports = VarianceRouter;
