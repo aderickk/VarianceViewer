@@ -8,10 +8,13 @@ class TableRow extends Component{
                     {this.props.obj._id}
                 </td>
                 <td>
-                    {this.props.obj.name}
+                    {this.props.obj.var001}
                 </td>
                 <td>
-                    {this.props.obj.var001}
+                    {this.props.obj.var100}
+                </td>
+                <td>
+                    {this.props.obj.var200}
                 </td>
             </tr>
         );

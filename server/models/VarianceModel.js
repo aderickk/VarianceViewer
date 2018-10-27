@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var VarianceModel = new Schema({
-    name: String,
-    var001: Number
+    //var001: Number,
+    //var200: Number
 },{
-    collection: 'samples2'
+    collection: 'samples'
 });
 
 module.exports = mongoose.model('VarianceModel', VarianceModel);

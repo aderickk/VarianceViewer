@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
-export default class VarViewer extends Component{
+
+export default class SampleViewer extends Component{
     constructor(props){
         super(props);
         this.state = {allVariances: []};
@@ -27,7 +28,9 @@ export default class VarViewer extends Component{
                     <thead>
                         <tr>
                             <td>ID</td>
-                            <td>Value</td>
+                            <td>Var 001</td>
+                            <td>Var 100</td>
+                            <td>Var 200</td>
                         </tr>
                     </thead>
                     <tbody>
