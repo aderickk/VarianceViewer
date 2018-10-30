@@ -12,8 +12,8 @@ class App extends Component {
         <div className="container">
           <h1>Variance Viewer</h1>
           <Switch>
-            <Route exact path = '/' component={SampleViewer} />
-            <Route path= '/index' component = {VarViewer}/>
+            <Route exact path = '/' component= {VarViewer} />
+            <Route path= '/samples' component = {SampleViewer}/>
           </Switch>
         </div>
       </Router>      
