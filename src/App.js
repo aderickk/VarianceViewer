@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-//import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import SampleViewer from './components/samples-viewer';
-import VarViewer from './components/var-viewer';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import SampleViewer from './components/extra/samples-viewer';
+import VarViewer from './components/main/var-viewer';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="container">
-          <h1>Variance Viewer</h1>
+          <h1 className="mainTitle">Variance Viewer</h1>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link to={'/'} className="nav-link">Main</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={'/samples'} className="nav-link">Samples</Link>
+              </li>
+            </ul>
+          </nav>
           <Switch>
             <Route exact path = '/' component= {VarViewer} />
             <Route path= '/samples' component = {SampleViewer}/>
           </Switch>
         </div>
-      </Router>      
+      </Router>
     );
   }
 }

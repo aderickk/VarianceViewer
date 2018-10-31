@@ -25,11 +25,18 @@ VarianceRouter.route('/id/:id').get(function (req, res){
 
 VarianceRouter.route('/single/:varId').get(function (req, res){
     const varId = req.params.varId;
-    var query = VarianceModel.find({}).select({ "_id": 0, [varId]: 1});
-    query.exec(function (err, allVariances) {
-        if (err){ console.log(err);}
-        else {res.json(allVariances);}
-    });
+
+    var varNumber = parseInt(varId.substring(varId.length - 3, varId.length));
+    
+    if (varNumber < 201 && varNumber > 0){
+        var query = VarianceModel.find({}).select({ "_id": 0, [varId]: 1});
+        query.exec(function (err, allVariances) {
+            if (err){ console.log(err);}
+            else {res.json(allVariances);}
+        });
+    } else {
+        res.json([]);
+    }
 });
 
 VarianceRouter.route('/single/').get(function (req, res){
