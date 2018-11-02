@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Grid, Row, Col, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Col, OverlayTrigger, Tooltip, Button, Form, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import VarChart from './VarChart'
 
 export default class VarViewer extends Component{
@@ -59,29 +59,43 @@ export default class VarViewer extends Component{
         return (<VarChart obj={chartObj}></VarChart>)
     }
     render(){
+        const validVarianceTooltip = (
+            <Tooltip id="tooltip1">
+                Valid variables are 1 - 200
+            </Tooltip>
+        );
         return (
             <div>
-                <Grid>
-                    <Row>
-                        <Col md={4}>
-                            <label>Current loaded variable : {this.state.reqVarId}</label>
-                        </Col>
-                    </Row>
-                    <Row className="show-grid">
-                        <Col md={3}>
-                            <label>Requested variable number : </label>
-                        </Col>
-                        <Col md={2} style={{"textAlign":"left"}}> 
-                                <input type="text" className="form-control" value={this.state.reqVariable} onChange={this.onChangeVariable}></input>
+                <Form horizontal>
+                    <FormGroup controlId="form1">
+                        <Col componentClass={ControlLabel} md={3} >
+                            Current loaded variable : 
                         </Col>
                         <Col md={2}>
-                            <button onClick={this.reloadComponent}>Load Variable</button>
+                            <FormControl disabled type="text" value={this.state.reqVarId} />
                         </Col>
-                    </Row>
-                    <Row>
-                        {this.drawChart()}
-                    </Row>
-                </Grid>
+                    </FormGroup>
+
+                    <FormGroup controlId="form2">
+                        <Col componentClass={ControlLabel} md={3}>
+                            Requested variable number :
+                        </Col>
+                        <Col md={2}>
+                            <OverlayTrigger placement="bottom" overlay={validVarianceTooltip}>
+                                <FormControl type="text" value={this.state.reqVariable} onChange={this.onChangeVariable} />
+                            </OverlayTrigger>
+                        </Col>
+                        <Col md={2}>
+                            <Button onClick={this.reloadComponent} bsStyle="primary">Load Variable</Button>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="form3">
+                        <Col md={8}>
+                            {this.drawChart()}
+                        </Col>
+                    </FormGroup>
+                </Form>
             </div>
         );
     }
