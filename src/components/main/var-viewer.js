@@ -43,7 +43,7 @@ export default class VarViewer extends Component{
                 } else{
                     this.setState({
                         allVariances : [],
-                        reqVarId: "---"
+                        reqVarId: '------'
                     });
                 }
             })
