@@ -1,42 +1,58 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
+import {Button, Table} from 'react-bootstrap';
+import SamplesTableRow from './SamplesTableRow';
 
 export default class SampleViewer extends Component{
     constructor(props){
         super(props);
-        this.state = {allVariances: []};
+        this.doLoadSamples = this.doLoadSamples.bind(this);
+        this.state = {allVariances: [], isLoading: false};
     }
-    componentDidMount(){
+    tabRow(){
+        var result = this.state.allVariances.map(
+            (object, i) => <SamplesTableRow key={i+1} 
+                                obj={{"seq": i+1, "data": object}} />
+        );
+
+        return result;
+    }
+    doLoadSamples(){
+        this.setState({isLoading: true});
         axios.get('http://localhost:4200/variances')
             .then(response => {
-                this.setState({ allVariances : response.data});
+                this.setState({ allVariances : response.data, isLoading: false});
             })
             .catch(function (error){
                 console.log(error);
             })
     }
-    tabRow(){
-        return this.state.allVariances.map(function(object, i){
-            return <TableRow obj={object} key={i} />;
-        });
-    }
     render(){
         return (
             <div style={{marginTop: 30}} className="container">
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Var 001</td>
-                            <td>Var 100</td>
-                            <td>Var 200</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.tabRow()}
-                    </tbody>
-                </table>
+                <div style={{textAlign: "center"}}>
+                    <Button bsStyle="info" onClick={this.doLoadSamples} 
+                        disabled = {this.state.isLoading}>
+                        {this.state.isLoading ? "Loading..." : "Load All Samples"}
+                    </Button>
+                </div>
+                <div style={{marginTop: 20}}>
+                    <Table responsive bordered striped>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>var001</th>
+                                <th>var050</th>
+                                <th>var100</th>
+                                <th>var150</th>
+                                <th>var200</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.tabRow()}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         )
     }

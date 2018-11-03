@@ -11,7 +11,7 @@ export default class VarViewer extends Component{
         this.state = {
             allVariances: [],
             reqVariable: '',
-            reqVarId: '---'
+            reqVarId: '------'
         };
     }
     onChangeVariable(e){
