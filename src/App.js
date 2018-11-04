@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
-import SampleViewer from './components/extra/samples-viewer';
+import SampleViewer from './components/samples/samples-viewer';
 import VarViewer from './components/main/var-viewer';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 
